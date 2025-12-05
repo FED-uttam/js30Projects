@@ -1,0 +1,16 @@
+[
+  { "keyCode": 65, "keyChar": "A", "sound": "clap", "src": "/JS-30-Projects/sounds/clap.wav" },
+  { "keyCode": 83, "keyChar": "S", "sound": "hihat", "src": "/JS-30-Projects/sounds/hihat.wav" },
+  { "keyCode": 68, "keyChar": "D", "sound": "kick", "src": "/JS-30-Projects/sounds/kick.wav" },
+  {
+    "keyCode": 70,
+    "keyChar": "F",
+    "sound": "openhat",
+    "src": "/JS-30-Projects/sounds/openhat.wav"
+  },
+  { "keyCode": 71, "keyChar": "G", "sound": "boom", "src": "/JS-30-Projects/sounds/boom.wav" },
+  { "keyCode": 72, "keyChar": "H", "sound": "ride", "src": "/JS-30-Projects/sounds/ride.wav" },
+  { "keyCode": 74, "keyChar": "J", "sound": "snare", "src": "/JS-30-Projects/sounds/snare.wav" },
+  { "keyCode": 75, "keyChar": "K", "sound": "tom", "src": "/JS-30-Projects/sounds/tom.wav" },
+  { "keyCode": 76, "keyChar": "L", "sound": "tink", "src": "/JS-30-Projects/sounds/tink.wav" }
+]

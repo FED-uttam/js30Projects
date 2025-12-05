@@ -1,36 +1,26 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import keysData from '@/data/drumKeys.json'
 
-const keys = ref([
-  { "keyCode": 65, "keyChar": "A", "sound": "clap", "src": "/JS-30-Projects/sounds/clap.wav" },
-  { "keyCode": 83, "keyChar": "S", "sound": "hihat", "src": "/JS-30-Projects/sounds/hihat.wav" },
-  { "keyCode": 68, "keyChar": "D", "sound": "kick", "src": "/JS-30-Projects/sounds/kick.wav" },
-  { "keyCode": 70, "keyChar": "F", "sound": "openhat", "src": "/JS-30-Projects/sounds/openhat.wav" },
-  { "keyCode": 71, "keyChar": "G", "sound": "boom", "src": "/JS-30-Projects/sounds/boom.wav" },
-  { "keyCode": 72, "keyChar": "H", "sound": "ride", "src": "/JS-30-Projects/sounds/ride.wav" },
-  { "keyCode": 74, "keyChar": "J", "sound": "snare", "src": "/JS-30-Projects/sounds/snare.wav" },
-  { "keyCode": 75, "keyChar": "K", "sound": "tom", "src": "/JS-30-Projects/sounds/tom.wav" },
-  { "keyCode": 76, "keyChar": "L", "sound": "tink", "src": "/JS-30-Projects/sounds/tink.wav" }
-])
+const keys = ref(keysData)
 
 const activeKey = ref(null)
 const playSound = (keyCode) => {
   const audio = document.querySelector(`audio[data-key="${keyCode}"]`)
-  if(!audio) return
-  audio.currentTime = 0;
-  audio.play();
-  activeKey.value = keyCode;
+  if (!audio) return
+  audio.currentTime = 0
+  audio.play()
+  activeKey.value = keyCode
 
-  setTimeout(()=> {
-    if(activeKey.value === keyCode) {
+  setTimeout(() => {
+    if (activeKey.value === keyCode) {
       activeKey.value = null
     }
   }, 150)
-
 }
 
 const handleKeyDown = (e) => {
- playSound(e.keyCode);
+  playSound(e.keyCode)
 }
 
 onMounted(() => {
@@ -38,7 +28,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-window.removeEventListener('keydown', handleKeyDown)
+  window.removeEventListener('keydown', handleKeyDown)
 })
 </script>
 
@@ -48,20 +38,20 @@ window.removeEventListener('keydown', handleKeyDown)
 
     <!-- Center container -->
     <div class="keys-container">
-      <div class="drumKeys" :class="{ playing: activeKey === item.keyCode}" v-for="item in keys" :key="item.keyCode" :data-key="item.keyCode">
+      <div
+        class="drumKeys"
+        :class="{ playing: activeKey === item.keyCode }"
+        v-for="item in keys"
+        :key="item.keyCode"
+        :data-key="item.keyCode"
+      >
         <kbd>{{ item.keyChar }}</kbd>
         <span class="soundName">{{ item.sound }}</span>
       </div>
     </div>
   </div>
-    <audio
-      v-for="key in keys"
-      :key="key.keyCode"
-      :data-key="key.keyCode"
-      :src="key.src"
-    ></audio>
+  <audio v-for="key in keys" :key="key.keyCode" :data-key="key.keyCode" :src="key.src"></audio>
 </template>
-
 
 <style scoped>
 .main {
@@ -72,7 +62,7 @@ window.removeEventListener('keydown', handleKeyDown)
 
   display: flex;
   flex-direction: column;
-  align-items: center;    /* Centers keys horizontally */
+  align-items: center; /* Centers keys horizontally */
   justify-content: center; /* Centers everything vertically */
 }
 h1 {
@@ -80,10 +70,10 @@ h1 {
 }
 .keys-container {
   display: flex;
-  gap: 20px;               /* Space between drum keys */
+  gap: 20px; /* Space between drum keys */
   flex-wrap: wrap;
   justify-content: center; /* Center inside container */
-  transition: all .07s ease;
+  transition: all 0.07s ease;
 }
 .playing {
   transform: scale(1.2);
@@ -93,7 +83,7 @@ h1 {
 .drumKeys {
   padding: 20px;
   min-width: 80px;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   color: white;
   text-align: center;
   border-radius: 8px;
