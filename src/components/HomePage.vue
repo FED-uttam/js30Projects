@@ -1,11 +1,11 @@
 <script setup>
-import DrumKit from "./DrumKit.vue"
+import JSClock from "./JSClock.vue"
 </script>
 <template>
   <div class="container">
     <h1>Home Page</h1>
   </div>
-  <drum-kit />
+  <JSClock />
 </template>
 <style scoped>
 html {
