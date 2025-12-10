@@ -1,5 +1,7 @@
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, defineEmits } from 'vue'
+
+const emit = defineEmits(['deleteList'])
 
 const props = defineProps({
   transactions: {
@@ -8,6 +10,9 @@ const props = defineProps({
   }
 })
 
+const deleteTransaction = (id) => {
+  emit('deleteList', id)
+}
 </script>
 
 <template>
@@ -19,7 +24,7 @@ const props = defineProps({
           :class="(transaction.amount < 0) ? 'minus' : 'plus'"
         >
           {{ transaction.text }} <span>${{ transaction.amount }}</span>
-          <button class="delete-btn">x</button>
+          <button @click="deleteTransaction(transaction.id)" class="delete-btn">x</button>
         </li>
       </ul>
 </template>

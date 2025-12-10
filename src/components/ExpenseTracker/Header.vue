@@ -1,12 +1,12 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import Balance from './Balance.vue'
 import IncomeExpenses from './IncomeExpenses.vue'
 import TransactionLists from './TransactionLists.vue'
 import AddTransaction from './AddTransaction.vue'
 import { useToast } from 'vue-toastification'
 
-const transactions = ref([{"id":1,"text":"Flower","amount":-20}])
+const transactions = ref([])
 
 const toast = useToast();
 //get Total Income
@@ -28,19 +28,38 @@ const expense = computed(() => {
   }, 0)
 });
 
+
 const handleTransaction = (transactionData) => {
   transactions.value.push({
     id: generateId(),
     text : transactionData.text,
     amount: transactionData.amount
   })
-console.log(generateId())
+  saveTrnasactions();
   toast.success("Entry Submitted Successfully");
 }
 
+const deleteList = (id) => {
+  transactions.value = transactions.value.filter((transactions) => transactions.id != id )
+  saveTrnasactions();
+  toast.success('Transaction Deleted');
+}
 const generateId = () => {
   return Math.floor(Math.random() * 100000)
 }
+
+// save to locale Storage
+const saveTrnasactions = () => {
+  localStorage.setItem('transactions', JSON.stringify(transactions.value))
+}
+
+// check for saved transactions
+onMounted(()=> {
+  const savedTransactions = JSON.parse(localStorage.getItem('transactions'));
+  if(savedTransactions) {
+    transactions.value = savedTransactions;
+  }
+})
 </script>
 
 <template>
@@ -48,7 +67,7 @@ const generateId = () => {
     <h2>Expense Tracker</h2>
     <Balance :totalAmount="+totalAmount"/>
     <IncomeExpenses :income="+income" :expense="+expense"/>
-    <TransactionLists :transactions="transactions"/>
+    <TransactionLists :transactions="transactions" @delete-list="deleteList"/>
     <AddTransaction @transaction-submitted="handleTransaction"/>
   </div>
 </template>
@@ -79,6 +98,11 @@ body {
 .container {
   margin: 30px auto;
   width: 400px;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
 }
 
 h1 {
