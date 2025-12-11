@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import Balance from './Balance.vue'
+import Balance from './TotalBalance.vue'
 import IncomeExpenses from './IncomeExpenses.vue'
 import TransactionLists from './TransactionLists.vue'
 import AddTransaction from './AddTransaction.vue'
