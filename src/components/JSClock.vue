@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, defineProps } from 'vue'
+import { ref, onMounted, defineProps, onBeforeUnmount  } from 'vue'
 
 const secondHand = ref(null)
 const minuteHand = ref(null)
@@ -12,6 +12,13 @@ const props = defineProps({
 const setDate = () => {
   const now = new Date()
   const seconds = now.getSeconds()
+
+  if(seconds === 0) {
+    secondHand.value.style.transition = 'none'
+  } else {
+    secondHand.value.style.transition = ''
+  }
+
   const secondHandDegrees = (seconds / 60) * 360 + 90
   secondHand.value.style.transform = `rotate(${secondHandDegrees}deg)`
 
@@ -27,6 +34,9 @@ const setDate = () => {
 onMounted(() => {
   setDate()
   setInterval(setDate, 1000)
+})
+onBeforeUnmount(()=> {
+  clearInterval()
 })
 </script>
 
