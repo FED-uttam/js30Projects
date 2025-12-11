@@ -1,14 +1,13 @@
 <script setup>
-import Header from './ExpenseTracker/Header.vue'
+import ExpenseHeader from './ExpenseTracker/ExpenseHeader.vue'
 </script>
 <template>
   <div class="homeContainer">
     <h1>Home Page</h1>
   </div>
-  <Header />
+  <ExpenseHeader />
 </template>
 <style scoped>
-
 .homeContainer {
   display: flex;
   align-items: center;

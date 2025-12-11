@@ -7,7 +7,7 @@ const props = defineProps({
   transactions: {
     type: Array,
     required: true,
-  }
+  },
 })
 
 const deleteTransaction = (id) => {
@@ -16,17 +16,17 @@ const deleteTransaction = (id) => {
 </script>
 
 <template>
-   <h3>History</h3>
-      <ul id="list" class="list">
-        <li
-          v-for="transaction in props.transactions"
-          :key="transaction.id"
-          :class="(transaction.amount < 0) ? 'minus' : 'plus'"
-        >
-          {{ transaction.text }} <span>${{ transaction.amount }}</span>
-          <button @click="deleteTransaction(transaction.id)" class="delete-btn">x</button>
-        </li>
-      </ul>
+  <h3>History</h3>
+  <ul id="list" class="list">
+    <li
+      v-for="transaction in props.transactions"
+      :key="transaction.id"
+      :class="transaction.amount < 0 ? 'minus' : 'plus'"
+    >
+      {{ transaction.text }} <span>₹{{ transaction.amount }}</span>
+      <button @click="deleteTransaction(transaction.id)" class="delete-btn">x</button>
+    </li>
+  </ul>
 </template>
 
 <style scoped>
@@ -36,7 +36,9 @@ const deleteTransaction = (id) => {
   margin-bottom: 40px;
 }
 .list li {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
   background-color: #fff;
   color: #333;
   display: flex;
@@ -44,7 +46,6 @@ const deleteTransaction = (id) => {
   position: relative;
   padding: 10px;
   margin: 10px 0;
-
 }
 .list li.plus {
   border-right: 5px solid #2ecc71;
@@ -73,6 +74,3 @@ const deleteTransaction = (id) => {
   opacity: 1;
 }
 </style>
-
-
-
