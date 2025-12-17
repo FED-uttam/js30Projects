@@ -1,17 +1,65 @@
 <script setup>
-import ExpenseHeader from './ExpenseTracker/ExpenseHeader.vue'
 </script>
+
 <template>
-  <div class="homeContainer">
-    <h1>Home Page</h1>
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2 class="title">Menu</h2>
+
+      <router-link class="nav-item" to="/jsclock">JS Clock</router-link>
+      <router-link class="nav-item" to="/expense-tracker">Expense Tracker</router-link>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content">
+      <router-view />
+    </main>
+
   </div>
-  <ExpenseHeader />
 </template>
+
 <style scoped>
-.homeContainer {
+.layout {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: aliceblue;
+  height: 100vh;
+  background: aliceblue;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: #1e293b;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: white;
+}
+
+.title {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+/* Sidebar Links */
+.nav-item {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.nav-item:hover {
+  background: #334155;
+}
+
+/* Viewport */
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
 }
 </style>
